@@ -1,26 +1,15 @@
 "use client";
-import { useCreateTvSeriesMutation } from "@/store/apis/tvSeriesApi";
-import React, { useState } from "react";
+import React from "react";
+import useTvSeries from "@/app/hooks/useTvSeries";
+import { Textarea } from "@/components/ui/textarea";
 
 const CreateTvSeries = () => {
-  const [tvSeries, setTvSeries] = useState({
-    name: "",
-    descrption: "",
-    image: "",
-    accessType: "PUBLIC",
-  });
-
-  const [createSeries, { data, isSuccess, isLoading, isError }] =
-    useCreateTvSeriesMutation();
-
-  const addSeriesHandler = () => {
-    createSeries({
-      name: tvSeries.name,
-      description: tvSeries.descrption,
-      imae: tvSeries.image,
-      accessType: tvSeries.accessType,
-    });
-  };
+  const {
+    tvSeriesInput,
+    setTvSeriesInput,
+    isNewTVSeriesLoading,
+    addSeriesHandler,
+  } = useTvSeries({});
 
   return (
     <div className="w-full p-20">
@@ -32,19 +21,18 @@ const CreateTvSeries = () => {
             className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border-2"
             placeholder="Series Name"
             onChange={(e) =>
-              setTvSeries((prev) => ({
+              setTvSeriesInput((prev) => ({
                 ...prev,
                 name: e.target.value,
               }))
             }
           />
 
-          <input
-            type="text"
+          <Textarea
             className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm border-2"
             placeholder="Series Description"
             onChange={(e) =>
-              setTvSeries((prev) => ({
+              setTvSeriesInput((prev) => ({
                 ...prev,
                 descrption: e.target.value,
               }))
@@ -55,13 +43,11 @@ const CreateTvSeries = () => {
           <button
             className="hover:cursor-pointer rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white shadow dark:hover:bg-teal-500"
             onClick={addSeriesHandler}
-            disabled={isLoading}
+            disabled={isNewTVSeriesLoading}
           >
-            {isLoading ? (
+            {isNewTVSeriesLoading && (
               <span className="loading loading-spinner loading-sm"></span>
-            ) : (
-              <p>Add</p>
-            )}
+            )} Add
           </button>
         </div>
       </div>

@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@reduxjs/toolkit": "^2.2.7",
+    "@tanstack/react-table": "^8.20.1",
     "@types/react-redux": "^7.1.33",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
